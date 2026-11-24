@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christmas Tom0 | Christmas Countdown</title>
+<style>
+  :root { --green:#123b2b; --green2:#20583f; --gold:#f4d58d; --cream:#fff8e9; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; color:var(--cream); font-family:Georgia, "Times New Roman", serif;
+    background:
+      radial-gradient(circle at 15% 15%, #ffffff22 0 2px, transparent 3px),
+      radial-gradient(circle at 80% 28%, #ffffff30 0 2px, transparent 3px),
+      radial-gradient(circle at 45% 70%, #ffffff22 0 2px, transparent 3px),
+      linear-gradient(145deg,#071f19,#123b2b 52%,#071b16);
+    background-size:130px 130px,170px 170px,210px 210px,auto;
+    display:flex; align-items:center; justify-content:center; padding:28px 16px;
+  }
+  .wrap { width:min(900px,100%); text-align:center; }
+  .eyebrow { letter-spacing:.28em; text-transform:uppercase; color:var(--gold); font:600 12px Arial,sans-serif; }
+  h1 { font-size:clamp(2.4rem,8vw,5.6rem); line-height:.98; margin:18px 0 12px; text-shadow:0 5px 24px #0008; }
+  .subtitle { color:#f8e9c8; font-size:clamp(1rem,3vw,1.25rem); margin:0 auto 30px; }
+  .tree { font-size:clamp(4rem,12vw,7rem); filter:drop-shadow(0 8px 18px #0008); margin:6px 0 18px; }
+  .countdown { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:0 auto 25px; max-width:720px; }
+  .unit { background:linear-gradient(160deg,#276448,#174630); border:1px solid #f4d58d66; border-radius:18px; padding:22px 8px 18px; box-shadow:0 12px 30px #0003; }
+  .number { display:block; font:700 clamp(2rem,7vw,4rem)/1 Arial,sans-serif; color:white; font-variant-numeric:tabular-nums; }
+  .label { display:block; margin-top:10px; color:var(--gold); font:600 11px Arial,sans-serif; letter-spacing:.18em; }
+  .message { min-height:28px; color:var(--gold); font-size:1.15rem; margin:18px 0 28px; }
+  .links { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
+  .links a { color:var(--green); background:var(--gold); text-decoration:none; border-radius:999px; padding:12px 19px; font:700 13px Arial,sans-serif; }
+  .links a:hover { transform:translateY(-2px); background:#ffe7ae; }
+  footer { margin-top:38px; color:#d5e4d9; font:12px Arial,sans-serif; opacity:.8; }
+  @media(max-width:520px) { .countdown { gap:7px; } .unit { padding:17px 4px 14px; border-radius:13px; } .label { font-size:9px; letter-spacing:.1em; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="eyebrow">A little festive magic</div>
+  <div class="tree" aria-hidden="true">🎄</div>
+  <h1>Christmas is<br><span style="color:var(--gold)">coming!</span></h1>
+  <p class="subtitle">The countdown to Christmas Day 2026 starts now.</p>
+  <section class="countdown" aria-label="Countdown to Christmas">
+    <div class="unit"><span class="number" id="days">--</span><span class="label">DAYS</span></div>
+    <div class="unit"><span class="number" id="hours">--</span><span class="label">HOURS</span></div>
+    <div class="unit"><span class="number" id="minutes">--</span><span class="label">MINUTES</span></div>
+    <div class="unit"><span class="number" id="seconds">--</span><span class="label">SECONDS</span></div>
+  </section>
+  <div class="message" id="message">✨ Making every second feel a little more magical ✨</div>
+  <nav class="links" aria-label="Social links">
+    <a href="https://www.tiktok.com/@christmas_tom0" target="_blank" rel="noopener">Follow on TikTok</a>
+    <a href="https://www.youtube.com/@christmas_tom0" target="_blank" rel="noopener">Watch on YouTube</a>
+  </nav>
+  <footer>Made with festive spirit by Christmas Tom0 · © 2026</footer>
+</main>
+<script>
+  const target = new Date(2026, 11, 25, 0, 0, 0); // Local midnight, 25 December 2026
+  const pad = n => String(n).padStart(2, "0");
+  function updateCountdown() {
+    const now = new Date();
+    let diff = target - now;
+    if (diff <= 0) {
+      ["days","hours","minutes","seconds"].forEach(id => document.getElementById(id).textContent = "00");
+      document.getElementById("message").textContent = "🎄 Merry Christmas! The big day is here! 🎄";
+      return;
+    }
+    const days = Math.floor(diff / 86400000); diff %= 86400000;
+    const hours = Math.floor(diff / 3600000); diff %= 3600000;
+    const minutes = Math.floor(diff / 60000); diff %= 60000;
+    const seconds = Math.floor(diff / 1000);
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = pad(hours);
+    document.getElementById("minutes").textContent = pad(minutes);
+    document.getElementById("seconds").textContent = pad(seconds);
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
